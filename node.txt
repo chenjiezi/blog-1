@@ -1,11 +1,8 @@
 1.http概述
 dns解析域名，建立TCP连接，发送http请求，server接收http请求，处理，并返回。客户端接受返回数据，处理数据（如渲染页面，执行js）
-2.git
 
+2.git
 warning: LF will be replaced by CRLF in ......  
 The file will have its original line endings in your working directory. 
-
 解决方法：
 git config --global core.autocrlf false
-
-git pull origin master --allow-unrelated-histories
