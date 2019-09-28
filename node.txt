@@ -7,3 +7,5 @@ The file will have its original line endings in your working directory.
 
 解决方法：
 git config --global core.autocrlf false
+
+git pull origin master --allow-unrelated-histories
