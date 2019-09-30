@@ -6,3 +6,12 @@ warning: LF will be replaced by CRLF in ......
 The file will have its original line endings in your working directory. 
 解决方法：
 git config --global core.autocrlf false
+
+3.直接在cookie存放username，很危险
+如何解决：用cookie存储userid，server端对应username
+解决方案： session， 即server端存储用户信息
+
+4.“SESSION_DATA是一个以userid为key,用户data对象为value的map。赋值给req.session是某个userid对应的用户data，而不是SESSION_DATA
+req.session存的是当前访问用户的用户信息，SESSION_DATA存的是所有访问用户的信息”
+
+5.登录校验：使用session
