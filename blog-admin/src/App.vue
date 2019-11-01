@@ -1,22 +1,22 @@
 <template>
   <div id="app">
-    <Side></Side>
+    <sidebar></sidebar>
     <div id="container">
-      <Header></Header>
-      <Main></Main>
+      <navbar></navbar>
+      <app-main></app-main>
     </div>
   </div>
 </template>
 
 <script>
-import Side from '@/layout/Side.vue'
-import Header from '@/layout/Header.vue'
-import Main from '@/layout/Main.vue'
+import Sidebar from '@/layout/Sidebar.vue'
+import Navbar from '@/layout/Navbar.vue'
+import AppMain from '@/layout/AppMain.vue'
 export default {
   components: {
-    Header,
-    Side,
-    Main
+    Navbar,
+    Sidebar,
+    AppMain
   },
   data () {
     return {
