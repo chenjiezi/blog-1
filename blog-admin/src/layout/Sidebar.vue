@@ -1,42 +1,76 @@
 <!-- side -->
 <template>
   <div class="side" :class="{'side_hidden': !isShow}" :style="{display: isMobilex}">
-    <!-- <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/demo">Demo</router-link> -->
-    <el-menu default-active="2" class="el-menu-vertical-demo" router :collapse-transition="false" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" :collapse="!isShow">
-      <el-submenu index="1">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span>导航一</span>
-        </template>
-        <el-menu-item-group>
-          <template slot="title">分组一</template>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
+    <el-scrollbar wrapStyle="overflow-x: hidden;" style="height:100%;">
+      <el-menu default-active="2" class="el-menu-vertical-demo" router :collapse-transition="false" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" :collapse="!isShow">
+        <el-submenu index="1">
+          <template slot="title">
+            <i class="el-icon-location"></i>
+            <span>导航一</span>
+          </template>
+          <el-menu-item-group>
+            <template slot="title">分组一</template>
+            <el-menu-item index="1-1">选项1</el-menu-item>
+            <el-menu-item index="1-2">选项2</el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group title="分组2">
+            <el-menu-item index="1-3">选项3</el-menu-item>
+          </el-menu-item-group>
+          <el-submenu index="1-4">
+            <template slot="title">选项4</template>
+            <el-menu-item index="1-4-1">选项1</el-menu-item>
+          </el-submenu>
         </el-submenu>
-      </el-submenu>
-      <el-menu-item index="/">
-        <i class="el-icon-menu"></i>
-        <span slot="title">Home</span>
-      </el-menu-item>
-      <el-menu-item index="/about">
-        <i class="el-icon-document"></i>
-        <span slot="title">About</span>
-      </el-menu-item>
-      <el-menu-item index="/demo">
-        <i class="el-icon-setting"></i>
-        <span slot="title">Demo</span>
-      </el-menu-item>
-    </el-menu>
+        <el-menu-item index="/">
+          <i class="el-icon-menu"></i>
+          <span slot="title">Home</span>
+        </el-menu-item>
+        <el-menu-item index="/about">
+          <i class="el-icon-document"></i>
+          <span slot="title">About</span>
+        </el-menu-item>
+        <el-menu-item index="/demo">
+          <i class="el-icon-setting"></i>
+          <span slot="title">Demo</span>
+        </el-menu-item>
+      </el-menu>
+    </el-scrollbar>
+    <el-drawer custom-class="el_drawer" :visible="isDrawer" direction="ltr" :show-close="false" :before-close="handleDrawerClose" size="200px">
+      <el-scrollbar wrapStyle="overflow-x: hidden;" style="height:100%;">
+        <el-menu default-active="2" class="el-menu-vertical-demo" router :collapse-transition="false" @select="handleSelect" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" :collapse="!isShow">
+          <el-submenu index="1">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>导航一</span>
+            </template>
+            <el-menu-item-group>
+              <template slot="title">分组一</template>
+              <el-menu-item index="1-1">选项1</el-menu-item>
+              <el-menu-item index="1-2">选项2</el-menu-item>
+            </el-menu-item-group>
+            <el-menu-item-group title="分组2">
+              <el-menu-item index="1-3">选项3</el-menu-item>
+            </el-menu-item-group>
+            <el-submenu index="1-4">
+              <template slot="title">选项4</template>
+              <el-menu-item index="1-4-1">选项1</el-menu-item>
+            </el-submenu>
+          </el-submenu>
+          <el-menu-item index="/home">
+            <i class="el-icon-menu"></i>
+            <span slot="title">Home</span>
+          </el-menu-item>
+          <el-menu-item index="/about">
+            <i class="el-icon-document"></i>
+            <span slot="title">About</span>
+          </el-menu-item>
+          <el-menu-item index="/demo">
+            <i class="el-icon-setting"></i>
+            <span slot="title">Demo</span>
+          </el-menu-item>
+        </el-menu>
+      </el-scrollbar>
+    </el-drawer>
   </div>
 </template>
 
@@ -57,6 +91,9 @@ export default {
   computed: {
     isShow () {
       return this.$store.state.isStretch
+    },
+    isDrawer () {
+      return this.$store.state.isDrawer
     }
   },
   // 监控data中的数据变化
@@ -64,7 +101,17 @@ export default {
   },
   // 方法集合
   methods: {
+    handleDrawerClose (done) {
+      this.$store.commit('isStretchCharge')
+    },
+    handleSelect (key, keyPath) {
+      if (keyPath[0].indexOf('/') >= 0) {
+        this.$store.commit('isStretchCharge')
+      }
+      console.log(key, keyPath)
+    },
     handleOpen (key, keyPath) {
+      // this.$store.commit('isStretchCharge')
       console.log(key, keyPath)
     },
     handleClose (key, keyPath) {
@@ -131,10 +178,8 @@ export default {
 .side_hidden {
   width: 64px;
 }
+
 .el-menu-vertical-demo {
-  height: 100%;
   border: none;
-  overflow-y: auto;
-  overflow-x: hidden;
 }
 </style>

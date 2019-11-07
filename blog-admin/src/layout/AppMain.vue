@@ -1,6 +1,10 @@
 <template>
   <div class="main">
-    <router-view />
+    <el-scrollbar wrapStyle="overflow-x:hidden;" style="height:100%;">
+      <div class="w">
+        <router-view />
+      </div>
+    </el-scrollbar>
   </div>
 </template>
 
@@ -11,9 +15,10 @@ export default {
 
 <style lang="scss" scoped>
 .main {
+  /* 50 === navbar height */
   height: calc(100vh - 50px);
-  overflow-y: auto;
-  overflow-x: hidden;
-  background: rgba(0, 0, 0, 0.3);
+}
+.w {
+  padding: 12px;
 }
 </style>
