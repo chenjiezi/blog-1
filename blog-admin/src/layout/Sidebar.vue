@@ -1,9 +1,11 @@
 <!-- sidebar -->
 <template>
   <div class="sidebar">
-    <div class="side" :class="{'side_hidden': !isShow}" :style="{display: isMobilex}">
+    <!-- 折叠式菜单 -->
+    <div class="side" :class="{'menu_fold': isFold, 'menu_hidden': isHidden}">
       <Menu></Menu>
     </div>
+    <!-- 抽屉式菜单 -->
     <el-drawer custom-class="el_drawer" :visible="isDrawer" direction="ltr" :show-close="false" :before-close="handleDrawerClose" size="200px">
       <Menu></Menu>
     </el-drawer>
@@ -22,14 +24,14 @@ export default {
   data () {
     // 这里存放数据
     return {
-      WIDTH: 992,
-      isMobilex: 'flex'
+      WIDTH: 992, // The Limit Between Desktop And Mobile
+      isHidden: false
     }
   },
   // 监听属性 类似于data概念
   computed: {
-    isShow () {
-      return this.$store.state.isStretch
+    isFold () {
+      return this.$store.state.isFold
     },
     isDrawer () {
       return this.$store.state.isDrawer
@@ -41,7 +43,7 @@ export default {
   // 方法集合
   methods: {
     handleDrawerClose (done) {
-      this.$store.commit('isStretchCharge')
+      this.$store.commit('toggleMenu')
     },
     isMobile () {
       const curWidth = document.body.getBoundingClientRect().width
@@ -49,13 +51,13 @@ export default {
     },
     resizeHandler () {
       const isMobile = this.isMobile()
+      this.isHidden = isMobile
       this.$store.commit('toggleDevice', isMobile)
-      this.isMobilex = isMobile ? 'none' : 'flex'
     }
   },
   // 生命周期 - 创建完成（可以访问当前this实例）
   created () {
-    // this.eventBus.$off('is-stretch').$on('is-stretch', res => {
+    // this.eventBus.$off('is-fold').$on('is-fold', res => {
     //   console.log('res:', res)
     //   this.isShow = res
     // })
@@ -90,17 +92,11 @@ export default {
   background: #545c64;
   transition: width 0.1s;
   -webkit-transition: width 0.1s; /* Safari */
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
-.side_hidden {
+.menu_fold {
   width: 64px;
+}
+.menu_hidden {
+  display: none;
 }
 </style>

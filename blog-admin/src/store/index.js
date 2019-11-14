@@ -4,21 +4,21 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
-    isStretch: true, // 侧栏显示/隐藏
+    isFold: false, // 侧栏显示/折叠
     isDrawer: false, // 抽屉显示/隐藏
-    device: 'desktop'
+    device: 'desktop' // desktop / mobile
   },
   mutations: {
-    isStretchCharge (state) {
+    toggleMenu (state) {
       if (state.device === 'desktop') {
-        state.isStretch = !state.isStretch
+        state.isFold = !state.isFold
       } else if (state.device === 'mobile') {
         state.isDrawer = !state.isDrawer
       }
     },
     toggleDevice (state, isMobile) {
       if (isMobile) {
-        state.isStretch = true
+        state.isFold = false
       } else {
         state.isDrawer = false
       }

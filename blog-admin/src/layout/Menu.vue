@@ -2,7 +2,7 @@
 <template>
   <div class='menu'>
     <el-scrollbar wrapStyle="overflow-x: hidden;" style="height:100%;">
-      <el-menu default-active="2" class="el-menu-vertical-demo" router :collapse-transition="false" @select="handleSelect" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" :collapse="!isShow">
+      <el-menu default-active="2" class="el-menu-vertical-demo" router :collapse-transition="false" @select="handleSelect" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" :collapse="isFold">
         <el-submenu index="1">
           <template slot="title">
             <i class="el-icon-location"></i>
@@ -68,8 +68,8 @@ export default {
   },
   // 监听属性 类似于data概念
   computed: {
-    isShow () {
-      return this.$store.state.isStretch
+    isFold () {
+      return this.$store.state.isFold
     }
   },
   // 监控data中的数据变化
@@ -79,12 +79,11 @@ export default {
   methods: {
     handleSelect (key, keyPath) {
       if (this.$store.state.device === 'mobile' && keyPath[0].indexOf('/') >= 0) {
-        this.$store.commit('isStretchCharge')
+        this.$store.commit('toggleMenu')
       }
-      // console.log(key, keyPath)
+      console.log(key, keyPath)
     },
     handleOpen (key, keyPath) {
-      // this.$store.commit('isStretchCharge')
       console.log(key, keyPath)
     },
     handleClose (key, keyPath) {

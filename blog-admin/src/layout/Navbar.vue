@@ -2,7 +2,7 @@
 <!-- Header -->
 <template>
   <div class='header'>
-    <el-button type="primary" size="mini" @click="stretchFunc">主要按钮</el-button>
+    <el-button type="primary" size="mini" @click="toggleMenuFunc">主要按钮</el-button>
   </div>
 </template>
 
@@ -17,22 +17,22 @@ export default {
   data () {
     // 这里存放数据
     return {
-      isStretch: true
+      isFold: true
     }
   },
   // 监听属性 类似于data概念
   computed: {},
   // 监控data中的数据变化
   watch: {
-    // isStretch (n, o) {
-    //   this.eventBus.$emit('is-stretch', n)
+    // isFold (n, o) {
+    //   this.eventBus.$emit('is-fold', n)
     // }
   },
   // 方法集合
   methods: {
-    stretchFunc () {
-      // this.isStretch = !this.isStretch
-      this.$store.commit('isStretchCharge')
+    toggleMenuFunc () {
+      // this.isFold = !this.isFold
+      this.$store.commit('toggleMenu')
     }
   },
   // 生命周期 - 创建完成（可以访问当前this实例）
