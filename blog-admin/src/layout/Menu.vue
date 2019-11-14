@@ -5,7 +5,7 @@
       <el-menu default-active="2" class="el-menu-vertical-demo" router :collapse-transition="false" @select="handleSelect" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" :collapse="isFold">
         <el-menu-item :index="item.path" v-for="(item,index) of menuList" :key="index">
           <i :class="item.icon"></i>
-          <span slot="title">{{item.name}}</span>
+          <span :slot="item.name">{{item.name}}</span>
         </el-menu-item>
       </el-menu>
     </el-scrollbar>
