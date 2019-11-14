@@ -10,7 +10,7 @@ Vue.use(ElementUI)
 Vue.config.productionTip = false
 
 // 事件总线 - 兄弟组件通信
-Vue.prototype.eventBus = new Vue()
+// Vue.prototype.eventBus = new Vue()
 
 new Vue({
   router,
