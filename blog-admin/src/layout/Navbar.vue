@@ -2,7 +2,7 @@
 <!-- Header -->
 <template>
   <div class='header'>
-    <el-button type="primary" size="mini" @click="toggleMenuFunc">主要按钮</el-button>
+    <el-button type="info" round size="mini" @click="toggleMenuFunc">菜单(折叠/展开)</el-button>
   </div>
 </template>
 
