@@ -37,6 +37,12 @@ const routes = [
     name: 'article',
     icon: 'el-icon-cold-drink',
     component: () => import('../views/Article.vue')
+  },
+  {
+    path: '/write',
+    name: 'write',
+    icon: 'el-icon-cold-drink',
+    component: () => import('../views/Write.vue')
   }
 ]
 
